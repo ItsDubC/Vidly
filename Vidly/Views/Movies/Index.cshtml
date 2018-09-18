@@ -1,0 +1,62 @@
+﻿@*@using Vidly.Models
+    @model List<Movie>*@
+
+@model IEnumerable<Vidly.Models.Movie>
+
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<h2>Movies</h2>
+
+@if (@Model.Count() == 0)
+{
+    <p>We don't have any movies yet.</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Movie
+            </th>
+            <th>
+                Genre
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+                </td>
+                <td>@item.Genre.Name</td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+}
+
+@*<h1>Movies</h1>
+    @if (Model.Count > 0)
+    {
+    <ul>
+        Movie
+        @foreach (var movie in Model)
+        {
+            <li>@movie.Name</li>
+        }
+    </ul>
+    }
+    else
+    {
+        <p>We don't have any movies yet.</p>
+    }*@
