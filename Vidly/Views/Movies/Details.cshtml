@@ -10,9 +10,9 @@
 
 <ul>
     <li>Genre: @Model.Genre.Name</li>
-    <li>Release Date:</li>
-    <li>Date Added:</li>
-    <li>Number in Stock: </li>
+    <li>Release Date: @Model.ReleaseDate.ToLongDateString()</li>
+    <li>Date Added: @Model.DateAdded.ToLongDateString()</li>
+    <li>Number in Stock: @Model.NumberInStock</li>
 </ul>
 
 @*<h2>Details</h2>
