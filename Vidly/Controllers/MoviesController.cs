@@ -99,5 +99,10 @@ namespace Vidly.Controllers
             else
                 return View(movie);
         }
+
+        public ActionResult New()
+        {
+            return View();
+        }
     }
 }

@@ -40,7 +40,20 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if  (customer.Id == 0)
+                _context.Customers.Add(customer);
+            else
+            {
+                var customerInDb = _context.Customers.Single(x => x.Id == customer.Id);
+
+                //TryUpdateModel(customerInDb, "", new string[] { "Name", "Email" });
+
+                customerInDb.Name = customer.Name;
+                customerInDb.BirthDate = customer.BirthDate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Customers");
@@ -50,13 +63,11 @@ namespace Vidly.Controllers
         public ViewResult Index()
         {
             var customers = _context.Customers.Include(c => c.MembershipType).ToList();
-            //return View(_customers);
             return View(customers);
         }
 
         public ActionResult Details(int id)
         {
-            //Customer customer = _customers.FirstOrDefault(x => x.Id == id);
             Customer customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(x => x.Id == id);
 
             if (customer == null)
