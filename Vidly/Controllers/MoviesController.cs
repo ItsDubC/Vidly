@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace Vidly.Controllers
 {
@@ -91,7 +92,7 @@ namespace Vidly.Controllers
 
         public ActionResult Details(int id)
         {
-            //Movie movie = _movies.FirstOrDefault(x => x.Id == id);
+            ////Movie movie = _movies.FirstOrDefault(x => x.Id == id);
             Movie movie = _context.Movies.Include(m => m.Genre).FirstOrDefault(x => x.Id == id);
 
             if (movie == null)
@@ -102,7 +103,53 @@ namespace Vidly.Controllers
 
         public ActionResult New()
         {
-            return View();
+            var viewModel = new MovieFormViewModel()
+            {
+                Genres = _context.Genres.ToList(),
+                HeaderText = "New Movie"
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Movie movie = _context.Movies.SingleOrDefault(x => x.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+            else
+            {
+                var viewModel = new MovieFormViewModel()
+                {
+                    Movie = movie,
+                    Genres = _context.Genres.ToList(),
+                    HeaderText = "Edit Movie"
+                };
+
+                return View("MovieForm", viewModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+                _context.Movies.Add(movie);
+            else
+            {
+                var movieInDb = _context.Movies.Single(x => x.Id == movie.Id);
+
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.GenreId = movie.GenreId;
+                movieInDb.NumberInStock = movie.NumberInStock;
+            }
+
+            _context.SaveChanges();
+
+
+            return RedirectToAction("Index", "Movies");
         }
     }
 }
