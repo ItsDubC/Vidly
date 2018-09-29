@@ -3,7 +3,7 @@ namespace Vidly.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ChangeMovieNumberInStocktobyte : DbMigration
+    public partial class ChangeMovieNumberInStockToByte : DbMigration
     {
         public override void Up()
         {

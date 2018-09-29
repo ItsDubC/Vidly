@@ -7,13 +7,13 @@ namespace Vidly.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ChangeMovieNumberInStocktobyte : IMigrationMetadata
+    public sealed partial class ChangeMovieNumberInStockToByte : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeMovieNumberInStocktobyte));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeMovieNumberInStockToByte));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809282156313_Change Movie NumberInStock to byte"; }
+            get { return "201809290932537_ChangeMovieNumberInStockToByte"; }
         }
         
         string IMigrationMetadata.Source

@@ -241,9 +241,9 @@
     <Compile Include="Migrations\201806051120292_AddReleaseDateDateAddedNumberInStockToMovie.Designer.cs">
       <DependentUpon>201806051120292_AddReleaseDateDateAddedNumberInStockToMovie.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809282156313_Change Movie NumberInStock to byte.cs" />
-    <Compile Include="Migrations\201809282156313_Change Movie NumberInStock to byte.Designer.cs">
-      <DependentUpon>201809282156313_Change Movie NumberInStock to byte.cs</DependentUpon>
+    <Compile Include="Migrations\201809290932537_ChangeMovieNumberInStockToByte.cs" />
+    <Compile Include="Migrations\201809290932537_ChangeMovieNumberInStockToByte.Designer.cs">
+      <DependentUpon>201809290932537_ChangeMovieNumberInStockToByte.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -378,8 +378,8 @@
     <EmbeddedResource Include="Migrations\201806051120292_AddReleaseDateDateAddedNumberInStockToMovie.resx">
       <DependentUpon>201806051120292_AddReleaseDateDateAddedNumberInStockToMovie.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809282156313_Change Movie NumberInStock to byte.resx">
-      <DependentUpon>201809282156313_Change Movie NumberInStock to byte.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809290932537_ChangeMovieNumberInStockToByte.resx">
+      <DependentUpon>201809290932537_ChangeMovieNumberInStockToByte.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
