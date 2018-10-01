@@ -51,24 +51,21 @@ else
 {
     <script>
         $(function () {
-            $("#customers .js-delete").on("click", function (e) {
-            //$("#customers .js-delete").click(function (e) {
+            $("#customers").on("click", ".js-delete", function (e) {
                 e.preventDefault();
                 var button = $(this);
 
-                bootbox.alert("Your message here…");
-
-                //bootbox.confirm("Are you sure you want to delete this customer?", function (result) {
-                //    if (result) {
-                //        $.ajax({
-                //            url: "/api/customers/" + button.attr("data-customer-id"),
-                //            method: "DELETE",
-                //            success: function () {
-                //                button.parents("tr").remove();
-                //            }
-                //        });
-                //    }
-                //});
+                bootbox.confirm("Are you sure you want to delete this customer?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/customers/" + button.attr("data-customer-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>
