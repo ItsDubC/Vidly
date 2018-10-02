@@ -16,39 +16,35 @@
 <br />
 <br />
 
-@if (@Model.Count() == 0)
+@*@if (@Model.Count() == 0)
 {
     <p>We don't have any movies yet.</p>
 }
 else
-{
-    <table class="table">
-        <tr>
-            <th>
-                Movie
-            </th>
-            <th>
-                Genre
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+{*@
+    <table id="movies" class="table table-bordered table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.ActionLink(item.Name, "Edit", new { id = item.Id })
-                </td>
-                <td>@item.Genre.Name</td>
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>*@
+                <th>Movie</th>
+                <th>Genre</th>
+                <th>Delete</th>
             </tr>
-        }
+        </thead>
+        <tbody></tbody>
+        
+
+        @*@foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Edit", new { id = item.Id })
+            </td>
+            <td>@item.Genre.Name</td>
+        </tr>
+        }*@
 
     </table>
-}
+@*  }*@
 
 @*<h1>Movies</h1>
     @if (Model.Count > 0)
@@ -65,3 +61,34 @@ else
     {
         <p>We don't have any movies yet.</p>
     }*@
+
+@section scripts
+{
+    <script>
+        $(function () {
+            var moviesTable = $("#movies").DataTable({
+                ajax: {
+                    url: "/api/movies",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, movie) {
+                            return "<a href='/movies/edit/" + movie.id + "'>" + movie.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "genre.name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button type='button' data-movie-id='" + data + "' class='btn btn-link js-delete'>Delete</button>";
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}
