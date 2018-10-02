@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Vidly.Models;
+using Vidly.Dtos;
 
 namespace Vidly.Dtos
 {
@@ -19,7 +20,11 @@ namespace Vidly.Dtos
 
         public byte MembershipTypeId { get; set; }
 
+        public MembershipTypeDto MembershipType { get; set; }
+
         //[Min18YearsIfAMember]
         public DateTime? BirthDate { get; set; }
+
+
     }
 }
