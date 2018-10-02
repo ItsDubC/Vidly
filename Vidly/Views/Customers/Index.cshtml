@@ -31,7 +31,7 @@ else
 {
     <script>
 		$(function () {
-			$("#customers").DataTable({
+			var customerTable = $("#customers").DataTable({
 				ajax: {
 					url: "/api/customers",
 					dataSrc: ""
@@ -64,7 +64,8 @@ else
                             url: "/api/customers/" + button.attr("data-customer-id"),
                             method: "DELETE",
                             success: function () {
-                                button.parents("tr").remove();
+                                //button.parents("tr").remove();
+                                customerTable.row(button.parents("tr")).remove().draw();
                             }
                         });
                     }
