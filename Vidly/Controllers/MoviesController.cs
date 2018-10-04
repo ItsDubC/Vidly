@@ -12,67 +12,19 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
-        //private IEnumerable<Movie> _movies;
         private ApplicationDbContext _context;
 
         public MoviesController()
         {
-            //_movies = new List<Movie>
-            //{
-            //    new Movie { Id = 1, Name = "Shrek" },
-            //    new Movie { Id = 2, Name = "Wall-E" }
-            //};
             _context = new ApplicationDbContext();
         }
 
-        // GET: Movies
-        //public ActionResult Random()
-        //{
-        //    Movie movie = new Movie() { Name = "Shrek" };
-        //    //return View(movie);
-        //    //return Content("Hello World");
-        //    //return HttpNotFound();
-        //    //return new EmptyResult();
-        //    //return RedirectToAction("Index", "Home", new { page = 1, sortBy = "name" });
-
-        //    //ViewData["Movie"] = movie;
-        //    //ViewBag.Movie = movie;
-
-        //    //var viewResult = new ViewResult();
-        //    //viewResult.ViewData.Model
-
-        //    var customers = new List<Customer>()
-        //    {
-        //        new Customer { Name = "Customer 1"},
-        //        new Customer { Name = "Customer 2"}
-        //    };
-
-        //    var viewModel = new RandomMovieViewModel
-        //    {
-        //        Movie = movie,
-        //        Customers = customers
-        //    };
-
-        //    return View(viewModel);
-        //}
-
-        //public ActionResult Index(int? pageIndex, string sortBy)
-        //{
-        //    if (!pageIndex.HasValue)
-        //        pageIndex = 1;
-
-        //    if (string.IsNullOrWhiteSpace(sortBy))
-        //        sortBy = "Name";
-
-        //    return Content(string.Format("pageIndex = {0}, sortBy = {1}", pageIndex, sortBy));
-        //}
-
         public ViewResult Index()
         {
-            //var movies = _context.Movies.Include(m => m.Genre).ToList();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
 
-            //return View(movies);
-            return View();
+            return View("ReadOnlyList");
         }
 
         //public ActionResult ByReleaseDate(int year, int month)
@@ -102,7 +54,8 @@ namespace Vidly.Controllers
                 return View(movie);
         }
 
-        public ActionResult New()
+        [Authorize(Roles = RoleName.CanManageMovies)]
+        public ViewResult New()
         {
             var viewModel = new MovieFormViewModel()
             {
