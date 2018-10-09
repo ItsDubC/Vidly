@@ -24,15 +24,31 @@ namespace Vidly.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            //  using Single instead of SingleOrDefault because since this is a public API, we prefer to throw a vague exception if a malicious user attempts to pass an invalid customer ID
-            var customer = _context.Customers.Single(x => x.Id == newRental.CustomerId);  
+			#region Public API logic (defensive approach)
 
-            var movies = _context.Movies.Where(x => newRental.MovieIds.Contains(x.Id)).ToList();
+			////Note:  For a public API, it is better to validate and return explicit error messages even if it pollutes the code.  For an internal API or MVC application, it's ok to throw errors
+			//if (newRental.MovieIds.Count == 0)
+			//	return BadRequest("No Movie IDs provided.");
+
+			//var customer = _context.Customers.SingleOrDefault(x => x.Id == newRental.CustomerId);
+
+			//if (customer == null)
+			//	return BadRequest("Invalid Customer ID.");
+
+			//var movies = _context.Movies.Where(x => newRental.MovieIds.Contains(x.Id)).ToList();
+
+			//if (movies.Count != newRental.MovieIds.Count)
+			//	return BadRequest("One or more Movie IDs are invalid.");
+
+			#endregion
+
+			var customer = _context.Customers.Single(x => x.Id == newRental.CustomerId);
+			var movies = _context.Movies.Where(x => newRental.MovieIds.Contains(x.Id)).ToList();
 
             foreach (var movie in movies)
             {
                 if (movie.NumberAvailable == 0)
-                    return BadRequest("Movie is not available.");
+                    return BadRequest("Movie '" + movie.Name + "' is not available.");
 
                 movie.NumberAvailable--;
 
