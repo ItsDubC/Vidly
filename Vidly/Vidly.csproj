@@ -20,12 +20,9 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44372</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>
-    </IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -306,6 +303,10 @@
     <Compile Include="Migrations\201810091134325_AddedNumberAvailableToMovie.cs" />
     <Compile Include="Migrations\201810091134325_AddedNumberAvailableToMovie.Designer.cs">
       <DependentUpon>201810091134325_AddedNumberAvailableToMovie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810111438125_MakeMovieNumberAvailableNotRequired.cs" />
+    <Compile Include="Migrations\201810111438125_MakeMovieNumberAvailableNotRequired.Designer.cs">
+      <DependentUpon>201810111438125_MakeMovieNumberAvailableNotRequired.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -652,6 +653,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810091134325_AddedNumberAvailableToMovie.resx">
       <DependentUpon>201810091134325_AddedNumberAvailableToMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810111438125_MakeMovieNumberAvailableNotRequired.resx">
+      <DependentUpon>201810111438125_MakeMovieNumberAvailableNotRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
